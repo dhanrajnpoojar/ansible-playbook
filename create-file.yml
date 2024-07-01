@@ -1,0 +1,8 @@
+---
+- name: Create a File
+  hosts: web_servers
+  tasks:
+    - name: Create a file
+      file:
+        path: /path/to/your/directory/filename.txt
+        state: touch

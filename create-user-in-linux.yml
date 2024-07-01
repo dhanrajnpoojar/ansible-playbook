@@ -1,0 +1,10 @@
+---
+- name: Create a User
+  hosts: web_servers
+  tasks:
+    - name: Create a user
+      user:
+        name: cloudgen
+        state: present
+        groups: users  # Add the user to the 'users' group
+        append: yes   # Append the user to the group if it already exists

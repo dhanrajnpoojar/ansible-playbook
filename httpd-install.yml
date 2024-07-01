@@ -1,0 +1,24 @@
+---
+- name: Install Apache HTTP Server (httpd)
+  hosts: web_servers
+  become: yes  # This allows you to run tasks with elevated privileges
+
+  tasks:
+    - name: Update package cache (for Red Hat)
+      yum:
+        name: "*"
+        state: present
+      when: ansible_os_family == 'RedHat'
+
+    - name: Install httpd package (for Red Hat)
+      package:
+        name: httpd
+        state: present
+      when: ansible_os_family == 'RedHat'
+
+    - name: Start and enable the httpd service
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+      when: ansible_os_family == 'RedHat'

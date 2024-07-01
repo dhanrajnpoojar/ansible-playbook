@@ -1,0 +1,12 @@
+---
+- name: Create Multiple Files
+  hosts: web_servers
+  tasks:
+    - name: Create multiple files
+      file:
+        path: "/path/to/your/directory/{{ item }}"
+        state: touch
+      with_items:
+        - file1.txt
+        - file2.txt
+        - file3.txt

@@ -1,0 +1,38 @@
+---
+- name: Install and Configure Jenkins on Rocky Linux
+  hosts: localhost
+  become: yes
+
+  tasks:
+    - name: Install Fontconfig
+      package:
+        name: fontconfig
+        state: present
+        
+    - name: Install Java (OpenJDK 11)
+      package:
+        name: java-11-openjdk
+        state: present
+
+    - name: Add Jenkins Repository Key
+      rpm_key:
+        key: https://pkg.jenkins.io/redhat/jenkins.io.key
+
+    - name: Add Jenkins Repository
+      yum_repository:
+        name: jenkins
+        description: Jenkins
+        baseurl: http://pkg.jenkins.io/redhat-stable
+        gpgcheck: yes
+        gpgkey: https://pkg.jenkins.io/redhat/jenkins.io.key
+
+    - name: Install Jenkins
+      package:
+        name: jenkins
+        state: present
+
+    - name: Start Jenkins Service
+      service:
+        name: jenkins
+        state: started
+        enabled: yes

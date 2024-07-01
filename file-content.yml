@@ -1,0 +1,8 @@
+---
+- name: Create a File with Content
+  hosts: web_servers
+  tasks:
+    - name: Copy a file with content
+      copy:
+        content: "Hi Welcome to Cloud Gen .\nSystems Pvt.Ltd ."
+        dest: /path/to/your/directory/filename.txt

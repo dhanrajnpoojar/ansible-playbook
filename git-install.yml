@@ -1,0 +1,8 @@
+---
+- name: Install Git on Red Hat
+  hosts: redhat_servers
+  tasks:
+    - name: Install Git
+      yum:
+        name: git
+        state: present

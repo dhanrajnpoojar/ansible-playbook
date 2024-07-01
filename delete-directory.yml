@@ -1,0 +1,8 @@
+---
+- name: Delete a Directory
+  hosts: web_servers
+  tasks:
+    - name: Delete a directory
+      file:
+        path: /path/to/your/directory-to-delete
+        state: absent

@@ -1,0 +1,55 @@
+---
+- name: Configure Jenkins
+  hosts: jenkins_server
+  become: yes
+
+  tasks:
+    - name: Install Java (OpenJDK 8)
+      package:
+        name: java-1.8.0-openjdk
+        state: present
+
+    - name: Add Jenkins Repository Key
+      rpm_key:
+        key: https://pkg.jenkins.io/redhat/jenkins.io.key
+
+    - name: Add Jenkins Repository
+      yum_repository:
+        name: jenkins
+        description: Jenkins
+        baseurl: http://pkg.jenkins.io/redhat-stable
+        gpgcheck: yes
+        gpgkey: https://pkg.jenkins.io/redhat/jenkins.io.key
+
+    - name: Install Jenkins
+      package:
+        name: jenkins
+        state: present
+
+    - name: Start Jenkins Service
+      service:
+        name: jenkins
+        state: started
+        enabled: yes
+
+    - name: Wait for Jenkins to become accessible
+      wait_for:
+        host: localhost
+        port: 8080
+        timeout: 300
+      delegate_to: 127.0.0.1
+      become: no
+
+    - name: Obtain Jenkins API Token
+      uri:
+        url: http://localhost:8080/scriptText
+        method: POST
+        headers:
+          Authorization: Basic YWRtaW46YWRtaW4=
+        body: script=println(hudson.security.HudsonPrivateSecurityRealm.DEFAULT.createAccount("your_username", "your_password").getProperty("apiToken"))
+        status_code: 200
+      register: api_token
+
+    - name: Display Jenkins API Token
+      debug:
+        var: api_token.json

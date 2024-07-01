@@ -1,0 +1,8 @@
+---
+- name: Copy Files from Remote to Local
+  hosts: web_servers
+  tasks:
+    - name: Copy files from remote to local
+      fetch:
+        src: /path/to/remote/file.txt
+        dest: /path/on/your/local/machine/

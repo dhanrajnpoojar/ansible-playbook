@@ -1,0 +1,9 @@
+---
+- name:
+  hosts: all
+  tasks:
+    - name: Gather System Facts
+      setup:
+    - name: Display OS Details
+      debug:
+        var: ansible_distribution

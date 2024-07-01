@@ -1,0 +1,8 @@
+---
+- name: Create a Directory
+  hosts: web_servers
+  tasks:
+    - name: Create a directory
+      file:
+        path: /path/to/your/new_directory
+        state: directory

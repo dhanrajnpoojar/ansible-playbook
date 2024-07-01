@@ -1,0 +1,8 @@
+---
+- name: File Creations
+  hosts: all
+  tasks:
+    - name: Create a New File with Test
+      copy:
+        content: "Hi This s my file with ansible playbook"
+        dest: /tmp/cloud.txt

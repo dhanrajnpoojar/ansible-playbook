@@ -1,0 +1,8 @@
+---
+- name: Delete a File
+  hosts: web_servers
+  tasks:
+    - name: Delete a file
+      file:
+        path: /path/to/your/file-to-delete.txt
+        state: absent

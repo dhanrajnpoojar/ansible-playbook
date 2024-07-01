@@ -1,0 +1,8 @@
+---
+- name: Copy a File
+  hosts: web_servers
+  tasks:
+    - name: Copy a file to remote servers
+      copy:
+        src: /path/to/your/local/file.txt
+        dest: /path/on/remote/servers/file.txt

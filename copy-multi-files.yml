@@ -1,0 +1,12 @@
+---
+- name: Copy Multiple Files
+  hosts: web_servers
+  tasks:
+    - name: Copy multiple files to remote servers
+      copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+      with_items:
+        - { src: "/path/to/your/local/file1.txt", dest: "/path/on/remote/servers/file1.txt" }
+        - { src: "/path/to/your/local/file2.txt", dest: "/path/on/remote/servers/file2.txt" }
+        - { src: "/path/to/your/local/file3.txt", dest: "/path/on/remote/servers/file3.txt" }

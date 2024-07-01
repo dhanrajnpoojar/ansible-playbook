@@ -1,0 +1,28 @@
+---
+- name: Set Java 11 Path on Nodes
+  hosts: nodes
+  become: yes
+
+  tasks:
+    - name: Set Java path in /etc/environment
+      lineinfile:
+        path: /etc/environment
+        line: 'JAVA_HOME=/usr/lib/jvm/java-11-openjdk'
+        state: present
+
+    - name: Update the PATH variable
+      lineinfile:
+        path: /etc/environment
+        line: 'PATH=$JAVA_HOME/bin:$PATH'
+        state: present
+
+    - name: Load the environment file
+      command: source /etc/environment
+      args:
+        executable: /bin/bash
+      register: result
+      changed_when: false
+
+    - name: Print the output
+      debug:
+        var: result.stdout_lines

@@ -1,0 +1,8 @@
+---
+- name: Fetch Files from Remote Nodes to Ansible Controller
+  hosts: web_servers
+  tasks:
+    - name: Fetch files from remote to Ansible controller
+      fetch:
+        src: /path/to/remote/file.txt
+        dest: /path/on/ansible/controller/

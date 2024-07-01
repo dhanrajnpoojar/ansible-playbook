@@ -1,0 +1,11 @@
+---
+- name: Get List of Linux Users
+  hosts: web_servers
+  tasks:
+    - name: List Linux Users
+      shell: cat /etc/passwd | cut -d : -f1
+      register: linux_users
+
+    - name: Display Linux Users List
+      debug:
+        var: linux_users.stdout_lines

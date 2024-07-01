@@ -1,0 +1,8 @@
+---
+- name: Start Apache Service
+  hosts: web_servers
+  tasks:
+    - name: Start the Apache service
+      service:
+        name: httpd
+        state: started

@@ -1,0 +1,11 @@
+---
+- name: Get Disk Information
+  hosts: web_servers
+  tasks:
+    - name: Get disk information
+      command: df -h
+      register: disk_info_output
+
+    - name: Display Disk Information
+      debug:
+        var: disk_info_output.stdout_lines

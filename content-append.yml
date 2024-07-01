@@ -1,0 +1,8 @@
+---
+- name: Append Data to a File
+  hosts: web_servers
+  tasks:
+    - name: Append data to a file
+      lineinfile:
+        path: /path/to/your/file.txt
+        line: "This is the line to append"

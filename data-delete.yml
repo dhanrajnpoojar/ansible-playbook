@@ -1,0 +1,9 @@
+---
+- name: Delete Data in a File
+  hosts: web_servers
+  tasks:
+    - name: Delete data from a file
+      replace:
+        path: /path/to/your/file.txt
+        regexp: 'Text to delete'
+        replace: ''

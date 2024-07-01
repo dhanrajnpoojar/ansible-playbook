@@ -1,0 +1,15 @@
+---
+- name: Install a Package
+  hosts: web_servers
+  tasks:
+    - name: Install the package on Debian/Ubuntu
+      apt:
+        name: git
+        state: present
+      when: ansible_os_family == 'Debian'
+
+    - name: Install the package on Red Hat/CentOS
+      yum:
+        name: git
+        state: present
+      when: ansible_os_family == 'RedHat'

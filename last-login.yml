@@ -1,0 +1,12 @@
+---
+- name: Get Last Login Details
+  hosts: web_servers
+  gather_facts: no
+  tasks:
+    - name: Get Last Login Details
+      command: last -n 1
+      register: last_login_output
+
+    - name: Display Last Login Details
+      debug:
+        var: last_login_output.stdout_lines

@@ -1,0 +1,8 @@
+---
+- name: Fetch Directories from Remote Nodes to Ansible Controller
+  hosts: web_servers
+  tasks:
+    - name: Fetch directories from remote to Ansible controller
+      synchronize:
+        src: /path/to/remote/directory/
+        dest: /path/on/ansible/controller/
